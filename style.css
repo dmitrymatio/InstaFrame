@@ -2,13 +2,13 @@ body {
     margin: 0;
     display: flex;
     flex-direction: column;
-    background-color: lightgrey;
+    background-color: whitesmoke;
 }
 
 header {
     position: fixed;
     width: 100%;
-    background: whitesmoke;
+    background: white;
     border-bottom-width: 1px;
     border-bottom-style: solid;
 }
@@ -19,7 +19,20 @@ header h1 {
 
 main {
     display: flex;
-    margin: 100px 100px 100px 100px;
+    flex-direction: column;
+    width: 100%;
+    padding: 100px;
+}
+
+.posts-row {
+    display: flex;
+    justify-content: flex-start;
+    margin: 0 0 50px 0;
+    width: 100%;
+}
+
+.posts-row:last-child {
+    margin-bottom: 30px;
 }
 
 .insta-post {
@@ -28,8 +41,8 @@ main {
     border-radius: 10px;
     width: 512px;
     height: auto;
-    background-image: linear-gradient(to top, #fad0c4 0%, #ffd1ff 100%);
     padding: 10px;
+    margin: 0 25px;
 }
 
 i {
@@ -94,4 +107,105 @@ i {
 .article-comments li:not(:last-child) {
     border-bottom-style: solid;
     border-bottom-width: 1px;
+}
+
+.comment-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 15px;
+}
+
+.comment-form input,
+.comment-form button {
+    background-color: transparent;
+    border: none;
+    font-size: 18px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.comment-form button {
+    width: 50px;
+}
+
+.comment-form button:hover {
+    background-color: rgba(128, 128, 128, 0.5);
+}
+
+footer {
+    position: fixed;
+    width: 100%;
+    background: white;
+    border-top-width: 1px;
+    border-top-style: solid;
+    bottom: 0;
+}
+
+.create-post {
+    margin: 15px 0 15px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.create-post input,
+.create-post button {
+    font-size: 20px;
+    margin: 10px;
+    padding: 5px 20px;
+}
+
+.create-post button {
+    background-color: transparent;
+    border: none;
+    border-radius: 5px;
+}
+
+.create-post button:hover {
+    background-color: rgba(128, 128, 128, 0.5);
+}
+
+.gradient001 {
+    background-image: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+}
+
+.gradient002 {
+    background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
+}
+
+.gradient003 {
+    background-image: linear-gradient(to top, #fad0c4 0%, #ffd1ff 100%);
+}
+
+.gradient004 {
+    background-image: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%);
+}
+
+.gradient005 {
+    background-image: linear-gradient(to right, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #b12a5b 100%);
+}
+
+.gradient006 {
+    background-image: linear-gradient(to top, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+}
+
+.gradient007 {
+    background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+}
+
+.gradient008 {
+    background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+}
+
+.gradient009 {
+    background-image: linear-gradient(to top, #fdcbf1 0%, #fdcbf1 1%, #e6dee9 100%);
+}
+
+.gradient010 {
+    background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+}
+
+.gradient011 {
+    background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
 }
