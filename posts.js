@@ -1,37 +1,76 @@
 const posts = [{
         id: 1,
-        username: "whoelsebutsam",
-        message: "This is a cat! 😸",
-        image_url: "https://images.pexels.com/photos/1183434/pexels-photo-1183434.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
+        frame: "gradient1",
+        username: "soybeanboy",
+        message: "It's ruff out here for a puppy.",
+        image_url: "Assets/adorable-animal-animal-photography-animal-portrait-594687.jpg",
         like_count: 2,
         comments: [{
-                message: "I also like cats"
+                message: "Dogs are my favorite people."
             },
             {
-                message: "Yeah, me too"
+                message: "This friendship is fur real."
             }
         ]
     },
     {
         id: 2,
-        username: "whoelsebutsam",
-        message: "This is a dog! 🐶",
-        image_url: "https://images.pexels.com/photos/1629781/pexels-photo-1629781.jpeg?cs=srgb&dl=adorable-animal-animal-photography-1629781.jpg&fm=jpg",
+        frame: "gradient2",
+        username: "soybeanboy",
+        message: "It's ruff out here for a puppy.",
+        image_url: "Assets/brown-and-white-short-coated-puppy-1805164.jpg",
         like_count: 2,
         comments: [{
-                message: "I also like dogs"
+                message: "Dogs are my favorite people."
             },
             {
-                message: "Yeah, me too"
+                message: "This friendship is fur real."
             }
         ]
     },
     {
         id: 3,
-        username: "whoelsebutsam",
-        message: "I'm not really sure what this is.",
-        image_url: "https://images.pexels.com/photos/209620/pexels-photo-209620.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-        like_count: 0,
-        comments: []
-    }
+        frame: "gradient11",
+        username: "soybeanboy",
+        message: "It's ruff out here for a puppy.",
+        image_url: "Assets/high-angle-photo-of-a-corgi-looking-upwards-2664417.jpg",
+        like_count: 2,
+        comments: [{
+                message: "Dogs are my favorite people."
+            },
+            {
+                message: "This friendship is fur real."
+            }
+        ]
+    },
+    {
+        id: 2,
+        frame: "gradient10",
+        username: "soybeanboy",
+        message: "It's ruff out here for a puppy.",
+        image_url: "Assets/pomeranian-puppy-1619690.jpg",
+        like_count: 2,
+        comments: [{
+                message: "Dogs are my favorite people."
+            },
+            {
+                message: "This friendship is fur real."
+            }
+        ]
+    },
+    {
+        id: 2,
+        frame: "gradient5",
+        username: "soybeanboy",
+        message: "It's ruff out here for a puppy.",
+        image_url: "Assets/short-coated-white-dog-on-white-textile-846083.jpg",
+        like_count: 2,
+        comments: [{
+                message: "Dogs are my favorite people."
+            },
+            {
+                message: "This friendship is fur real."
+            }
+        ]
+    },
 ]
