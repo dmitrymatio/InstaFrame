@@ -5,11 +5,13 @@ const createRow = () => {
     main.appendChild(sectionRow);
 }
 
-const createPostElement = (postObj) => {
+const createPostElement = (postObj, parent) => {
     const postStructure = [
         { "element": "article", "class": "insta-post", "imageContainer": "section.posts-row" },
         { "element": "div", "class": "article-header", "imageContainer": "article.insta-post" },
         { "element": "h2", "class": "username", "imageContainer": "div.article-header" },
+        { "element": "figure", "class": "article-photo", "imageContainer": "div.article-header" },
+        { "element": "img", "class": "post-photo", "imageContainer": "figure.article-photo" },
     ];
 
     postStructure.forEach((elObj) => {
@@ -25,6 +27,9 @@ const createPostElement = (postObj) => {
                 num = getRandomInt(1, 11);
                 createElement.classList.add(`gradient${num}`);
                 createElement.classList.add(`post${postObj.id}`);
+                break;
+            case "post-photo":
+                createElement.setAttribute("src", postObj.image_url);
                 break;
         }
 
