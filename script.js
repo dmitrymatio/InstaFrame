@@ -15,9 +15,8 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
 }
 
-const renderPost = (postObj, rowId) => {
-
-    const postStructure = [
+function poatStr(postObj, row) {
+    [
         { "element": "article", "classList": ["insta-post", `post-${postObj.id}`, `gradient${postObj.frame}`], "parent": `section.posts-row.row-${rowId}` },
         { "element": "div", "classList": ["article-header"], "attributes": [], "parent": `article.insta-post.post-${postObj.id}` },
         { "element": "h2", "classList": ["username"], "innerHTML": postObj.username, "parent": `article.insta-post.post-${postObj.id} div.article-header` },
@@ -50,6 +49,11 @@ const renderPost = (postObj, rowId) => {
         },
         { "element": "button", "innerHTML": "Post", "parent": `article.insta-post.post-${postObj.id} form.comment-form` },
     ];
+}
+
+const renderPost = (postObj, rowId) => {
+
+    const postStructure = postStr(postObj, rowId);
 
     postStructure.forEach((elObj) => {
 
