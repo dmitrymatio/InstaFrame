@@ -72,7 +72,5 @@ let posts = [{
                 message: "This friendship is fur real."
             }
         ]
-    },
-]
-
-/* export { posts }; */
+    }
+];

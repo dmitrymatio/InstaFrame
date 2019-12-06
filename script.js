@@ -1,7 +1,10 @@
-/* import { posts } from './posts.mjs/index.mjs'; */
+const main = document.querySelector("main");
+const createPost = document.querySelector("form.create-post");
+const username = document.querySelector("form.create-post input[name='username']");
+const comment = document.querySelector("form.create-post input[name='post-comment']");
+const image = document.querySelector("form.create-post input[name='image-url']");
 
 const createRow = (rowId) => {
-    const main = document.querySelector("main");
     const sectionRow = document.createElement("section");
 
     sectionRow.classList.add("posts-row");
@@ -15,8 +18,66 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
 }
 
-function poatStr(postObj, row) {
-    [
+const createPostElement = (post, rowId) => {
+
+    const postStructure = postStr(post, rowId);
+
+    postStructure.forEach((elObj) => {
+
+        const childEl = document.createElement(elObj.element);
+        const parentEl = document.querySelector(elObj.parent);
+
+        if (elObj.classList) {
+            elObj.classList.forEach(classItem => childEl.classList.add(classItem));
+        }
+
+        if (elObj.attributes) {
+            elObj.attributes.forEach(atr => childEl.setAttribute(atr[0], atr[1]));
+        }
+
+        if (elObj.innerHTML) {
+            childEl.innerHTML = elObj.innerHTML;
+        }
+
+        if (elObj.comments) {
+            elObj.comments.forEach((comment) => {
+                const listItem = document.createElement("LI");
+                listItem.innerHTML = `<i>account_circle</i>${comment.message}`;
+                childEl.appendChild(listItem);
+            });
+        }
+
+        parentEl.appendChild(childEl);
+
+    });
+
+}
+
+const renderContent = (postsArray) => {
+    const main = document.querySelector("main");
+
+    main.innerHTML = "";
+    let rowId = 1;
+
+    for (let i = 0; i < posts.length; i++) {
+
+        const postObj = postsArray[i];
+
+        if (i == 0) {
+            createRow(rowId);
+            createPostElement(postObj, rowId);
+        } else if ((postObj.id) % 3 == 0) {
+            createPostElement(postObj, rowId);
+            rowId++;
+            createRow(rowId);
+        } else {
+            createPostElement(postObj, rowId);
+        }
+    }
+}
+
+const postStr = (postObj, rowId) => {
+    return [
         { "element": "article", "classList": ["insta-post", `post-${postObj.id}`, `gradient${postObj.frame}`], "parent": `section.posts-row.row-${rowId}` },
         { "element": "div", "classList": ["article-header"], "attributes": [], "parent": `article.insta-post.post-${postObj.id}` },
         { "element": "h2", "classList": ["username"], "innerHTML": postObj.username, "parent": `article.insta-post.post-${postObj.id} div.article-header` },
@@ -51,141 +112,26 @@ function poatStr(postObj, row) {
     ];
 }
 
-const renderPost = (postObj, rowId) => {
-
-    const postStructure = postStr(postObj, rowId);
-
-    postStructure.forEach((elObj) => {
-
-        const childEl = document.createElement(elObj.element);
-        const parentEl = document.querySelector(elObj.parent);
-
-        if (elObj.classList) {
-            elObj.classList.forEach(classItem => childEl.classList.add(classItem));
-        }
-
-        if (elObj.attributes) {
-            elObj.attributes.forEach(atr => childEl.setAttribute(atr[0], atr[1]));
-        }
-
-        if (elObj.innerHTML) {
-            childEl.innerHTML = elObj.innerHTML;
-        }
-
-        if (elObj.comments) {
-            elObj.comments.forEach((comment) => {
-                const listItem = document.createElement("LI");
-                listItem.innerHTML = `<i>account_circle</i>${comment.message}`;
-                childEl.appendChild(listItem);
-            });
-        }
-
-        parentEl.appendChild(childEl);
-
-    });
-
-}
-
-const renderContent = (postsArray) => {
-
-    let rowId = 1;
-
-    for (let i = 0; i < posts.length; i++) {
-
-        const postObj = postsArray[i];
-
-        if (i == 0) {
-            createRow(rowId);
-            renderPost(postObj, rowId);
-        } else if ((i - 1) % 3 == 0) {
-            renderPost(postObj, rowId);
-            rowId++;
-            createRow(rowId);
-        } else {
-            renderPost(postObj, rowId);
-        }
-
-
-
-    }
-
-}
-
-var posts = [{
-        id: 1,
-        frame: 1,
-        username: "soybeanboy",
-        message: "It's ruff out here for a puppy.",
-        image_url: "Assets/adorable-animal-animal-photography-animal-portrait-594687.jpg",
-        like_count: 2,
-        comments: [{
-                message: "Dogs are my favorite people."
-            },
-            {
-                message: "This friendship is fur real."
-            }
-        ]
-    },
-    {
-        id: 2,
-        frame: 11,
-        username: "soybeanboy",
-        message: "It's ruff out here for a puppy.",
-        image_url: "Assets/brown-and-white-short-coated-puppy-1805164.jpg",
-        like_count: 2,
-        comments: [{
-                message: "Dogs are my favorite people."
-            },
-            {
-                message: "This friendship is fur real."
-            }
-        ]
-    },
-    {
-        id: 3,
-        frame: 10,
-        username: "soybeanboy",
-        message: "It's ruff out here for a puppy.",
-        image_url: "Assets/high-angle-photo-of-a-corgi-looking-upwards-2664417.jpg",
-        like_count: 2,
-        comments: [{
-                message: "Dogs are my favorite people."
-            },
-            {
-                message: "This friendship is fur real."
-            }
-        ]
-    },
-    {
-        id: 4,
-        frame: 7,
-        username: "soybeanboy",
-        message: "It's ruff out here for a puppy.",
-        image_url: "Assets/pomeranian-puppy-1619690.jpg",
-        like_count: 2,
-        comments: [{
-                message: "Dogs are my favorite people."
-            },
-            {
-                message: "This friendship is fur real."
-            }
-        ]
-    },
-    {
-        id: 5,
-        frame: 5,
-        username: "soybeanboy",
-        message: "It's ruff out here for a puppy.",
-        image_url: "Assets/short-coated-white-dog-on-white-textile-846083.jpg",
-        like_count: 2,
-        comments: [{
-                message: "Dogs are my favorite people."
-            },
-            {
-                message: "This friendship is fur real."
-            }
-        ]
-    },
-]
-
 renderContent(posts);
+
+
+
+createPost.addEventListener("submit", () => {
+    event.preventDefault();
+    const elObj = {
+        id: posts.length + 1,
+        frame: getRandomInt(1, 11),
+        username: username.value,
+        message: comment.value,
+        image_url: image.value,
+        like_count: 0,
+        comments: []
+    }
+    posts.push(elObj);
+    renderContent(posts);
+
+    createPost.reset();
+    main.scrollIntoView({
+        behavior: "smooth"
+    });
+});
