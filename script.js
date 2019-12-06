@@ -1,8 +1,11 @@
 const main = document.querySelector("main");
 const createPost = document.querySelector("form.create-post");
 const username = document.querySelector("form.create-post input[name='username']");
-const comment = document.querySelector("form.create-post input[name='post-comment']");
+const caption = document.querySelector("form.create-post input[name='post-comment']");
 const image = document.querySelector("form.create-post input[name='image-url']");
+
+let commentArr;
+
 
 const createRow = (rowId) => {
     const sectionRow = document.createElement("section");
@@ -57,6 +60,7 @@ const renderContent = (postsArray) => {
     const main = document.querySelector("main");
 
     main.innerHTML = "";
+
     let rowId = 1;
 
     for (let i = 0; i < posts.length; i++) {
@@ -74,6 +78,24 @@ const renderContent = (postsArray) => {
             createPostElement(postObj, rowId);
         }
     }
+
+    commentsArr = document.querySelectorAll("form.comment-form");
+    commentsArr.forEach(commentForm => {
+        commentForm.addEventListener("submit", () => {
+            event.preventDefault();
+            const parent = commentForm.parentElement;
+            const parentClass = parent.className;
+            const postId = Number(parentClass[parentClass.search("post-") + 5]);
+            const input = document.querySelector(`article.insta-post.post-${postId} form.comment-form input[name='comment']`);
+
+            console.log(input.value);
+            posts[postId - 1].comments.push({ message: input.value });
+
+            renderContent(posts);
+
+            commentForm.reset();
+        });
+    });
 }
 
 const postStr = (postObj, rowId) => {
@@ -114,15 +136,13 @@ const postStr = (postObj, rowId) => {
 
 renderContent(posts);
 
-
-
 createPost.addEventListener("submit", () => {
     event.preventDefault();
     const elObj = {
         id: posts.length + 1,
         frame: getRandomInt(1, 11),
         username: username.value,
-        message: comment.value,
+        message: caption.value,
         image_url: image.value,
         like_count: 0,
         comments: []
