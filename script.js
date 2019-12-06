@@ -1,11 +1,8 @@
 const main = document.querySelector("main");
 const createPost = document.querySelector("form.create-post");
 const username = document.querySelector("form.create-post input[name='username']");
-const caption = document.querySelector("form.create-post input[name='post-comment']");
+const caption = document.querySelector("form.create-post input[name='post-caption']");
 const image = document.querySelector("form.create-post input[name='image-url']");
-
-let commentArr;
-
 
 const createRow = (rowId) => {
     const sectionRow = document.createElement("section");
@@ -19,6 +16,10 @@ function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+}
+
+const checkImgURL = (url) => {
+    return (url.match(/\.(jpeg|jpg|gif|png)$/) == null);
 }
 
 const createPostElement = (post, rowId) => {
@@ -79,7 +80,7 @@ const renderContent = (postsArray) => {
         }
     }
 
-    commentsArr = document.querySelectorAll("form.comment-form");
+    const commentsArr = document.querySelectorAll("form.comment-form");
     commentsArr.forEach(commentForm => {
         commentForm.addEventListener("submit", () => {
             event.preventDefault();
@@ -88,14 +89,41 @@ const renderContent = (postsArray) => {
             const postId = Number(parentClass[parentClass.search("post-") + 5]);
             const input = document.querySelector(`article.insta-post.post-${postId} form.comment-form input[name='comment']`);
 
-            console.log(input.value);
-            posts[postId - 1].comments.push({ message: input.value });
+            if (input.value.length < 5) {
+                alert("Invalid comment. Must be 5 characters or longer");
+            } else {
+                posts[postId - 1].comments.push({ message: input.value });
 
-            renderContent(posts);
+                renderContent(posts);
 
-            commentForm.reset();
+                commentForm.reset();
+            }
+
         });
     });
+
+    const actionIcons = document.querySelectorAll("div.article-action-icons i");
+    actionIcons.forEach(icon => {
+        icon.addEventListener("click", () => {
+            event.preventDefault();
+            const ultimateParent = icon.parentElement.parentElement.parentElement;
+            const parentClass = ultimateParent.className;
+            const postId = Number(parentClass[parentClass.search("post-") + 5]);
+
+            switch (icon.innerText) {
+                case "favorite":
+                    console.log(`Like post-${postId}`);
+                    break;
+                case "comment":
+                    console.log(`Comment post-${postId}`);
+                    break;
+                case "share":
+                    console.log(`Share post-${postId}`);
+                    break;
+            }
+        });
+    });
+
 }
 
 const postStr = (postObj, rowId) => {
@@ -138,20 +166,31 @@ renderContent(posts);
 
 createPost.addEventListener("submit", () => {
     event.preventDefault();
-    const elObj = {
-        id: posts.length + 1,
-        frame: getRandomInt(1, 11),
-        username: username.value,
-        message: caption.value,
-        image_url: image.value,
-        like_count: 0,
-        comments: []
-    }
-    posts.push(elObj);
-    renderContent(posts);
 
-    createPost.reset();
-    main.scrollIntoView({
-        behavior: "smooth"
-    });
+    if (username.value.length < 5 || caption.value.length < 5) {
+        alert("Invalid input.\nUsername and Caption must each be longer than 5 characters");
+    } else if (checkImgURL(image.value)) {
+        alert("Invalid image URL");
+    } else {
+
+        const elObj = {
+            id: posts.length + 1,
+            frame: getRandomInt(1, 11),
+            username: username.value,
+            message: caption.value,
+            image_url: image.value,
+            like_count: 0,
+            comments: []
+        }
+
+        posts.push(elObj);
+        renderContent(posts);
+
+        createPost.reset();
+        main.scrollIntoView({
+            behavior: "smooth"
+        });
+    }
+
+
 });
